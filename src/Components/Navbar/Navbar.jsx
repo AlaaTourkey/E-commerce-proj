@@ -6,7 +6,6 @@ import { CounterContext } from '../Context/counterContext'
 import { UserContext } from '../Context/userContext'
 
 
-
 function Navbar() {
 
   let { counter } = useContext(CounterContext);
@@ -34,7 +33,7 @@ function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {userToken !== null ? <>
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="Home">Home {counter}</Link>
+                  <Link className="nav-link active" aria-current="page" to="Home">Home </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="Products">Products</Link>
@@ -46,16 +45,15 @@ function Navbar() {
                   <Link className="nav-link" to="Brands">Brands</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="Cart">Cart</Link>
+                  <Link className="nav-link" to="Cart">Cart {counter}</Link>
                 </li>
               </> : ""}
             </ul>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            
-                
+
               {userToken !== null ? <>
-                <li className="nav-item d-flex align-items-center">
+                <li className="nav-item d-flex align-items-center cursor-pointer">
                   <i class="fa-brands fa-facebook mx-2"></i>
                   <i class="fa-brands fa-twitter mx-2"></i>
                   <i class="fa-brands fa-instagram mx-2"></i>
@@ -71,8 +69,6 @@ function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link" to="Register">Register</Link>
                 </li></>}
-
-
 
             </ul>
           </div>
