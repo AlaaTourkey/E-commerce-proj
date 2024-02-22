@@ -3,13 +3,30 @@ import Style from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import Slider from 'react-slick';
+import { Helmet } from 'react-helmet';
 
 
 function ProductDetails() {
 
+  // for slider of products info
+  var settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+    arrows: false,
+  };
+
+  // get the id of each product
   let { id } = useParams();
   console.log(id);
 
+  // get product details function
   function getProductDetails(id) {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
   }
@@ -19,10 +36,23 @@ function ProductDetails() {
 
   return (
     <>
+
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{data?.data.data.title}</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+
       <div className="container">
         {data?.data.data ? <div className="row d-flex align-items-center">
           <div className="col-md-4">
-            <img className='w-100 p-2' src={data?.data.data.imageCover} alt={data?.data.data.title} />
+            <Slider {...settings}>
+
+              {data?.data.data?.images.map((img) => {
+                return <img key={img} className='w-100' src={img} alt={data?.data.data.title} />
+              })}
+
+            </Slider>
           </div>
           <div className="col-md-8">
             <h2 className='fw-bold'>{data?.data.data.title}</h2>

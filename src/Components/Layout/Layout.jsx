@@ -4,10 +4,10 @@ import { Outlet } from 'react-router-dom'
 import Footer from '../Footer/Footer'
 import Navbar from '../Navbar/Navbar'
 import { UserContext } from '../Context/userContext'
-
+import { Offline, Online } from "react-detect-offline";
 
 function Layout() {
-  let {setUserToken} = useContext(UserContext);
+  let { setUserToken } = useContext(UserContext);
   useEffect(() => {
     if (localStorage.getItem('userToken') !== null) {
       setUserToken(localStorage.getItem('userToken'))
@@ -16,9 +16,16 @@ function Layout() {
 
   return (
     <>
-      <Navbar/>
-      <Outlet/>
-      <Footer/>
+      <Navbar />
+      <Outlet />
+      <div >
+        <Offline >
+            <div className="network">
+            <i class="fa fa-wifi" aria-hidden="true"></i> You are offline (surprise!)
+            </div> 
+        </Offline>
+      </div>
+      <Footer />
     </>
   )
 }

@@ -11,6 +11,7 @@ export default function CounterContextProvider(props) {
   function decreaseCounter(params) {
     setCounter(counter - 1)
   }
+
   return <CounterContext.Provider value={ {counter , changeCounter , decreaseCounter} } >
     {props.children}
   </CounterContext.Provider>

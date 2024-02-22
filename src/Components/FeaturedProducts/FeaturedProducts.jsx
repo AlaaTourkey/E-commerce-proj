@@ -5,18 +5,27 @@ import { useQuery } from 'react-query';
 import { Bars } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../Context/cartContext';
+import toast from 'react-hot-toast';
 
 
 
 function FeaturedProducts() {
 
-let {addToCart} = useContext(CartContext)
+  let { addToCart } = useContext(CartContext)
 
-// fun that use addtocart fun from cartcontext
-async function addProduct(productId){
-  let response = await addToCart(productId);
-  console.log(response);
-}
+  // fun that use addtocart fun from cartcontext
+  async function addProduct(productId) {
+    let response = await addToCart(productId);
+    if (response.data.status === 'success') {
+      toast.success('product Successfully added' ,  {
+        duration : 4000,
+      })
+    }else{
+      toast.error('product not added')
+    }
+    console.log(response);
+  }
+
 
   // get products function
   function getFeaturedProducts() {
@@ -38,28 +47,28 @@ async function addProduct(productId){
           wrapperStyle={{}}
           wrapperClass=""
           visible={true} />
-      </div> : <div className="container">
+      </div> : <div className="container ">
         <div className="row ">
           {data?.data.data.map((product) => <div key={product.id} className="col-6 col-sm-4 col-md-2">
-            <div className="product">
-            <Link to={`/Productdetails/${product.id}`}>
-              <div className=" cursor-pointer p-3 ">
-                <img src={product.imageCover} className='w-100' alt={product.title} />
+            <div className="product p-3">
+              <Link to={`/Productdetails/${product.id}`}>
+                <div className=" cursor-pointer  ">
+                  <img src={product.imageCover} className='w-100' alt={product.title} />
 
-                <span className='text-main font-sm fw-bolder'>{product.category.name}</span>
-                <h3 className='h5'>{product.title.split(" ").slice(0, 2).join(" ")}</h3>
+                  <span className='text-main font-sm fw-bolder'>{product.category.name}</span>
+                  <h3 className='h5'>{product.title.split(" ").slice(0, 2).join(" ")}</h3>
 
-                <div className="d-flex justify-content-between mt-3">
-                  <span>{product.price} EGP</span>
-                  <span><i class="fa fa-star rating-color" ></i> {product.ratingsAverage}</span>
+                  <div className="d-flex justify-content-between mt-3">
+                    <span>{product.price} EGP</span>
+                    <span><i class="fa fa-star rating-color" ></i> {product.ratingsAverage}</span>
+                  </div>
+
                 </div>
-
-              </div>
-            </Link>
-                <button onClick={()=> addProduct(product.id)} className='btn bg-main text-white w-100 btn-sm mt-2'>
-                  add to cart
-                </button>
-                </div>
+              </Link>
+              <button onClick={() => addProduct(product.id)} className='btn bg-main text-white w-100 btn-sm mt-2'>
+                add to cart
+              </button>
+            </div>
           </div>)}
 
         </div>

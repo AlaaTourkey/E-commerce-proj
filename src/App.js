@@ -14,6 +14,9 @@ import CounterContextProvider from './Components/Context/counterContext';
 import UserContextProvider from './Components/Context/userContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import CartContextProvider from './Components/Context/cartContext';
+import { Toaster } from 'react-hot-toast';
+
 
 
 let routers = createBrowserRouter([
@@ -39,11 +42,14 @@ let routers = createBrowserRouter([
 function App() {
 
   return <UserContextProvider>
-              <CounterContextProvider>
-                <RouterProvider router={routers}></RouterProvider>
-              </CounterContextProvider>
-            </UserContextProvider>
-          
+          <CartContextProvider>
+            <CounterContextProvider>
+              <RouterProvider router={routers}></RouterProvider>
+              <Toaster position="top-center" />
+            </CounterContextProvider>
+          </CartContextProvider>
+        </UserContextProvider>
+
 }
 
 export default App;
