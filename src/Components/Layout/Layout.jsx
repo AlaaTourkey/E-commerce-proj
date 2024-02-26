@@ -17,12 +17,14 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="my-5 py-4">
+        <Outlet />
+      </div>
       <div >
         <Offline >
-            <div className="network">
+          <div className="network">
             <i class="fa fa-wifi" aria-hidden="true"></i> You are offline (surprise!)
-            </div> 
+          </div>
         </Offline>
       </div>
       <Footer />

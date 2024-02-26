@@ -2,15 +2,15 @@ import React, { useContext } from 'react'
 import Style from './Navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../Assets/images/freshcart-logo.svg'
-import { CounterContext } from '../Context/counterContext'
 import { UserContext } from '../Context/userContext'
+import { CartContext } from '../Context/cartContext'
 
 
 function Navbar() {
 
-  let { counter } = useContext(CounterContext);
-  let { userToken,setUserToken} = useContext(UserContext);
-  let navigate= useNavigate()
+  let {numOfCartItem} = useContext(CartContext);
+  let { userToken, setUserToken } = useContext(UserContext);
+  let navigate = useNavigate()
 
   function logout() {
     localStorage.removeItem('userToken')
@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="fixed-top navbar navbar-expand-lg navbar-light bg-light py-3 ">
         <div className="container-fluid">
           <span className='navbar-brand' >
             <img src={logo} alt="fresh market logo" srcset="" />
@@ -44,8 +44,12 @@ function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link" to="Brands">Brands</Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="Cart">Cart {counter}</Link>
+                <li className="nav-item position-relative">
+                  <Link className="nav-link " to="Cart"><i className="fas fa-cart-plus  fs-5 mx-2 "></i></Link>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-main">
+                    {numOfCartItem}
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
                 </li>
               </> : ""}
             </ul>
@@ -53,22 +57,27 @@ function Navbar() {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
               {userToken !== null ? <>
+                <div className="d-flex align-items-center ">
+                  
+                </div>
+
                 <li className="nav-item d-flex align-items-center cursor-pointer">
-                  <i class="fa-brands fa-facebook mx-2"></i>
-                  <i class="fa-brands fa-twitter mx-2"></i>
-                  <i class="fa-brands fa-instagram mx-2"></i>
-                  <i class="fa-brands fa-youtube mx-2"></i>
-                  <i class="fa-brands fa-tiktok mx-2"></i>
+                  <i className="fa-brands fa-facebook mx-2"></i>
+                  <i className="fa-brands fa-twitter mx-2"></i>
+                  <i className="fa-brands fa-instagram mx-2"></i>
+                  <i className="fa-brands fa-youtube mx-2"></i>
+                  <i className="fa-brands fa-tiktok mx-2"></i>
                 </li>
+
                 <li className="nav-item">
                   <span onClick={logout} className="nav-link cursor-pointer" to="Login">Logout</span>
                 </li></> :
                 <><li className="nav-item">
                   <Link className="nav-link active" aria-current="page" to="Login">login</Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="Register">Register</Link>
-                </li></>}
+                  <li className="nav-item">
+                    <Link className="nav-link" to="Register">Register</Link>
+                  </li></>}
 
             </ul>
           </div>

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Style from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Slider from 'react-slick';
 import { Helmet } from 'react-helmet';
+import { CartContext } from '../Context/cartContext';
+import toast from 'react-hot-toast';
 
 
 function ProductDetails() {
@@ -22,6 +24,7 @@ function ProductDetails() {
     arrows: false,
   };
 
+  let{ addToCart ,setNumOfCartItem}= useContext(CartContext)
   // get the id of each product
   let { id } = useParams();
   console.log(id);
@@ -33,6 +36,22 @@ function ProductDetails() {
 
   let { data, isLoading, isError } = useQuery('productDetails', () => getProductDetails(id));
   console.log(data?.data.data);
+
+
+  // fun that use addtocart fun from cartcontext
+  async function addProduct(productId) {
+    let response = await addToCart(productId);
+    if (response.data.status === 'success') {
+      setNumOfCartItem(response.data.numOfCartItems);
+      toast.success('product Successfully added' ,  {
+        duration : 4000,
+      })
+    }else{
+      toast.error('product not added')
+    }
+    console.log(response.data);
+  }
+
 
   return (
     <>
@@ -62,7 +81,7 @@ function ProductDetails() {
               <h6 className='text-main'>{data?.data.data.price} EGP</h6>
               <h6><i class="fa fa-star rating-color" ></i> {data?.data.data.ratingsAverage}</h6>
             </div>
-            <button className='btn text-white bg-main form-control my-2'>+ add to cart </button>
+            <button onClick={()=>addProduct(data?.data.data. id)} className='btn text-white bg-main form-control my-2'>+ add to cart </button>
 
           </div>
         </div> : " "}

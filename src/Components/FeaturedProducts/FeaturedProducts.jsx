@@ -11,19 +11,20 @@ import toast from 'react-hot-toast';
 
 function FeaturedProducts() {
 
-  let { addToCart } = useContext(CartContext)
+  let { addToCart ,setNumOfCartItem} = useContext(CartContext)
 
   // fun that use addtocart fun from cartcontext
   async function addProduct(productId) {
     let response = await addToCart(productId);
     if (response.data.status === 'success') {
+      setNumOfCartItem(response.data.numOfCartItems);
       toast.success('product Successfully added' ,  {
         duration : 4000,
       })
     }else{
       toast.error('product not added')
     }
-    console.log(response);
+    console.log(response.data);
   }
 
 
@@ -32,7 +33,7 @@ function FeaturedProducts() {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
   }
 
-  let { isLoading, data, isError, isFetching } = useQuery('featuredProducts', getFeaturedProducts);
+  let { isLoading, data} = useQuery('featuredProducts', getFeaturedProducts);
 
 
 

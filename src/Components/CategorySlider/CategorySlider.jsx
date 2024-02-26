@@ -52,7 +52,6 @@ function CategorySlider() {
 
   let { data, isLoading, isError } = useQuery('getCategories', getCategories)
 
-  console.log(data?.data.data);
   return (
     <>
       <div className="container mb-5 mt-3">
