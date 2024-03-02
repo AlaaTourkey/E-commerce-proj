@@ -16,6 +16,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
 import CartContextProvider from './Components/Context/cartContext';
 import { Toaster } from 'react-hot-toast';
+import Checkout from './Components/Checkout/Checkout';
 
 
 
@@ -28,6 +29,7 @@ let routers = createBrowserRouter([
       { path: 'Brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
       { path: 'Categories', element: <ProtectedRoute><Categories /> </ProtectedRoute> },
       { path: 'Products', element: <ProtectedRoute><Products /></ProtectedRoute> },
+      { path: 'Checkout/:id', element: <ProtectedRoute><Checkout /></ProtectedRoute> },
       { path: 'Productdetails/:id', element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
       { path: 'Register', element: <Register /> },
       { path: 'Login', element: <Login /> },

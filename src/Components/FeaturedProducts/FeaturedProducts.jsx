@@ -18,7 +18,7 @@ function FeaturedProducts() {
     let response = await addToCart(productId);
     if (response.data.status === 'success') {
       setNumOfCartItem(response.data.numOfCartItems);
-      toast.success('product Successfully added' ,  {
+      toast.success(response.data.message ,  {
         duration : 4000,
       })
     }else{
@@ -61,7 +61,7 @@ function FeaturedProducts() {
 
                   <div className="d-flex justify-content-between mt-3">
                     <span>{product.price} EGP</span>
-                    <span><i class="fa fa-star rating-color" ></i> {product.ratingsAverage}</span>
+                    <span><i className="fa fa-star rating-color" ></i> {product.ratingsAverage}</span>
                   </div>
 
                 </div>

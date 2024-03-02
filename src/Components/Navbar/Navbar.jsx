@@ -23,7 +23,7 @@ function Navbar() {
       <nav className="fixed-top navbar navbar-expand-lg navbar-light bg-light py-3 ">
         <div className="container-fluid">
           <span className='navbar-brand' >
-            <img src={logo} alt="fresh market logo" srcset="" />
+            <img src={logo} alt="fresh market logo" srcSet="" />
           </span>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
@@ -46,9 +46,9 @@ function Navbar() {
                 </li>
                 <li className="nav-item position-relative">
                   <Link className="nav-link " to="Cart"><i className="fas fa-cart-plus  fs-5 mx-2 "></i></Link>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-main">
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-main">
                     {numOfCartItem}
-                      <span class="visually-hidden">unread messages</span>
+                      <span className="visually-hidden">unread messages</span>
                     </span>
                 </li>
               </> : ""}

@@ -81,7 +81,7 @@ function ProductDetails() {
               <h6 className='text-main'>{data?.data.data.price} EGP</h6>
               <h6><i class="fa fa-star rating-color" ></i> {data?.data.data.ratingsAverage}</h6>
             </div>
-            <button onClick={()=>addProduct(data?.data.data. id)} className='btn text-white bg-main form-control my-2'>+ add to cart </button>
+            <button onClick={()=>addProduct(data?.data.data.id)} className='btn text-white bg-main form-control my-2'>+ add to cart </button>
 
           </div>
         </div> : " "}

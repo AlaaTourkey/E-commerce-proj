@@ -65,16 +65,35 @@ export default function CartContextProvider(props) {
   const [cartId, setCartId] = useState(null)
   const [numOfCartItem, setNumOfCartItem] = useState(0)
 
-  async function getInitialCart() {
-    let {data} = await getLoggedUserCart()
-    setNumOfCartItem(data.numOfCartItem);
+  // to update number of cart items 
+  useEffect(() => {
+    const fetchInitialCart = async () => {
+      try {
+        const response = await getLoggedUserCart();
+        setNumOfCartItem(response.data.numOfCartItems);
+      } catch (error) {
+        console.error('Error fetching initial cart data:', error);
+      }
+    };
+
+    fetchInitialCart();
+  }, []);
+
+
+  // checkout function (payment)
+  async function checkoutPayment(id, shippingData) {
+    return axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:3000`, {
+      shippingData: shippingData
+    },
+      {
+        headers: headers
+      })
+      .then((response) => response)
+      .catch((error) => error);
   }
 
-  useEffect(() => {
-    getInitialCart()
-  }, [])
 
-  return <CartContext.Provider value={{ addToCart, getLoggedUserCart, removeItem, updateQuantity, clearCart ,numOfCartItem, setNumOfCartItem }}>
+  return <CartContext.Provider value={{ addToCart, getLoggedUserCart, removeItem, updateQuantity, clearCart, numOfCartItem, setNumOfCartItem ,checkoutPayment}}>
     {props.children}
   </CartContext.Provider>
 }
