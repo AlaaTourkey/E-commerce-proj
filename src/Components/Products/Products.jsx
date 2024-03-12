@@ -1,10 +1,10 @@
 import React from 'react'
 import Style from './Products.module.css'
+import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 function Products() {
   return (
     <>
-      <h1>Products
-Products</h1>
+      <FeaturedProducts />
     </>
   )
 }

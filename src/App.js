@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import Layout from './Components/Layout/Layout';
 import Home from './Components/Home/Home';
 import Brands from './Components/Brands/Brands';
@@ -20,7 +20,7 @@ import Checkout from './Components/Checkout/Checkout';
 
 
 
-let routers = createBrowserRouter([
+let routers = createHashRouter([
   {
     path: '/', element: <Layout />, children: [
       { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
